@@ -6,6 +6,21 @@ export default function Form() {
   const submitFunction = (e) => {
     console.log(localURL);
     console.log(file);
+
+    const form = new FormData();
+
+    // 'file' matches the name the backend is expecting.
+    form.append("file", file);
+    form.append("test", "empty");
+
+    fetch("http://localhost:8080/file-upload", {
+      method: "POST",
+      mode: "cors",
+      body: form,
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+
     e.preventDefault();
   };
 
