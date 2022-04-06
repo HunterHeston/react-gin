@@ -11,6 +11,7 @@ func main() {
 
 	// allow the frontend to make requests
 	r.Use(cors.New(cors.Config{
+		// address of the frontend when running `npm run dev`
 		AllowOrigins: []string{"http://localhost:3000"},
 		AllowMethods: []string{"POST"},
 		AllowHeaders: []string{"Content-Type"},

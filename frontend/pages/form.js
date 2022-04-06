@@ -11,10 +11,16 @@ export default function Form() {
 
     // 'file' matches the name the backend is expecting.
     form.append("file", file);
+    // 'test' is just another form field to make sure things are working.
     form.append("test", "empty");
 
     fetch("http://localhost:8080/file-upload", {
       method: "POST",
+      headers: {
+        // works with this commented out. Fails if included.
+        // "Content-Type":
+        //   'multipart/form-data; charset=utf-8; boundary="------my-boundary"',
+      },
       mode: "cors",
       body: form,
     })
@@ -24,6 +30,7 @@ export default function Form() {
     e.preventDefault();
   };
 
+  // update state with file and preview.
   const imageChange = (e) => {
     setFile(e?.target?.files[0]);
     setLocalURL(URL.createObjectURL(e?.target?.files[0]));
